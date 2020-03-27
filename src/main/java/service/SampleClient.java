@@ -23,6 +23,33 @@ public class SampleClient {
        
         
     }
+     private static void insertUser(User user) throws InterruptedException, ExecutionException,JsonProcessingException   {
+//      ObjectMapper objectMapper = new ObjectMapper();
+//       String reques =objectMapper.writeValueAsString(user);
+//     final Response response=client
+//      .target("http://localhost:9090/TestRest-1.0-SNAPSHOT/rest/employees")
+//      .request(MediaType.APPLICATION_JSON)
+//      .post(Entity.entity(reques, MediaType.APPLICATION_JSON));
+//     if(response.getStatus()!=200){
+//          throw new RuntimeException("Failed : HTTP error code :"+response.getStatus());
+//        }
+//		System.out.println("Response received : " + response.readEntity(Response.class));
+//     
+     
+    System.out.println(user);
+       ObjectMapper objectMapper = new ObjectMapper();
+       String reques =objectMapper.writeValueAsString(user);
+    Response response= client
+      .target("http://localhost:9090/TestRest-1.0-SNAPSHOT/rest").path("employees")
+      .request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+      .post(Entity.entity(reques, MediaType.APPLICATION_JSON));
+     
+        
+		System.out.println("Response received : " +response+ response.readEntity(String.class));
+
+    System.out.println(">>> Done ");
+     
+	}
     private static void addUser(User user)throws InterruptedException,JsonProcessingException{
         ObjectMapper objectMapper = new ObjectMapper();
          String reques =objectMapper.writeValueAsString(user);
